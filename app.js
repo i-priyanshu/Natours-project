@@ -38,9 +38,7 @@ app.get('/api/v1/tours/:id', (req, res) => {
   res.status(200).json({
     status: 'Success',
     results: tour.length,
-    data: {
-      tour: tour,
-    },
+    data: null,
   });
 });
 
@@ -53,6 +51,22 @@ app.patch('/api/v1/tours/:id', (req, res) => {
   }
 
   res.status(200).json({
+    status: 'success',
+    data: {
+      message: '<Updated tour here...>',
+    },
+  });
+});
+
+app.delete('/api/v1/tours/:id', (req, res) => {
+  if (req.params.id * 1 > tours.length) {
+    return res.status(400).json({
+      status: 'Fail',
+      message: "This Tour doesn't exist in database!",
+    });
+  }
+
+  res.status(204).json({
     status: 'success',
     data: {
       message: '<Updated tour here...>',
