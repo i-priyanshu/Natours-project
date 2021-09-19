@@ -1,0 +1,22 @@
+{
+  "name": "natours-project",
+  "version": "1.0.0",
+  "description": "Learning Node.js and MongoDB in depth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-priyanshu/Natours-project.git"
+  },
+  "author": "Priyanshu Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/i-priyanshu/Natours-project/issues"
+  },
+  "homepage": "https://github.com/i-priyanshu/Natours-project#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
