@@ -4,6 +4,27 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 );
 
+exports.checkId = (req, res, next, val) => {
+  console.log(`Tour id is : ${val}`);
+  if (req.params.id * 1 > tours.length) {
+    return res.status(400).json({
+      status: 'Fail',
+      message: "This Tour doesn't exist in database!",
+    });
+  }
+  next();
+};
+
+exports.checkInput = (req, res, next) => {
+  if (!req.body.name || !req.body.price) {
+    return res.status(400).json({
+      status: 'Fail',
+      message: `This tour doesn't have valid properties!`,
+    });
+  }
+  next();
+};
+
 exports.getAllTours = (req, res) => {
   res.status(200).json({
     status: 'Success',
@@ -15,17 +36,9 @@ exports.getAllTours = (req, res) => {
 };
 
 exports.getTour = (req, res) => {
-  console.log(req.params);
-
+  // console.log(req.params);
   const id = req.params.id * 1;
   const tour = tours.find((el) => el.id === id);
-  //   if (id > tours.length) {
-  if (!tour) {
-    return res.status(400).json({
-      status: 'Fail',
-      message: "This Tour doesn't exist in database!",
-    });
-  }
   res.status(200).json({
     status: 'Success',
     results: tour.length,
@@ -36,13 +49,6 @@ exports.getTour = (req, res) => {
 };
 
 exports.EditTour = (req, res) => {
-  if (req.params.id * 1 > tours.length) {
-    return res.status(400).json({
-      status: 'Fail',
-      message: "This Tour doesn't exist in database!",
-    });
-  }
-
   res.status(200).json({
     status: 'success',
     data: {
@@ -52,13 +58,6 @@ exports.EditTour = (req, res) => {
 };
 
 exports.DeleteTour = (req, res) => {
-  if (req.params.id * 1 > tours.length) {
-    return res.status(400).json({
-      status: 'Fail',
-      message: "This Tour doesn't exist in database!",
-    });
-  }
-
   res.status(204).json({
     status: 'success',
     data: null,
