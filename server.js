@@ -17,7 +17,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((con) => {
-    console.log('DATABASE connected!!');
+    console.log('DATABASE connected! 🥳');
   });
 
 const port = process.env.PORT || 3000;

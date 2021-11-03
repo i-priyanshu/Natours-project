@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const tourSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'A tour must have a Name.'],
+    required: [true, 'A Tour must have a Name.'],
     unique: true,
     trim: true,
   },
@@ -49,6 +49,7 @@ const tourSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now(),
+    select: false,
   },
   startDates: [Date],
 });
