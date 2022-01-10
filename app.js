@@ -38,7 +38,11 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // Prevent Parameter Pollution
-app.use(hpp());
+app.use(
+  hpp({
+    whitelist: ['duration'],
+  })
+);
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
