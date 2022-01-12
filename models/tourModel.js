@@ -107,7 +107,7 @@ const tourSchema = new mongoose.Schema(
     guides: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: 'User', // `ref` creates link between two models. and sets a base for 'populate'.
+        ref: 'User', // `ref` creates link between two models. and sets   a base for 'populate'.
       },
     ],
   },
