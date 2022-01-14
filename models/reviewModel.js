@@ -1,5 +1,4 @@
 // review / rating / createdAt / ref to User/ ref to Tour
-
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema(
