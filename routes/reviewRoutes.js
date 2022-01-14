@@ -8,8 +8,12 @@ Router.route('/')
   .post(
     authController.protect,
     authController.restrictTo('user'),
+    reviewController.setTourUserIds,
     reviewController.createNewRev
   );
 
-Router.route('/:id').delete(reviewController.deleteReview);
+Router.route('/:id')
+  .patch(reviewController.updatereview)
+  .delete(reviewController.deleteReview);
+
 module.exports = Router;

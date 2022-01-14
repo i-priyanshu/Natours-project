@@ -56,46 +56,9 @@ exports.getTour = catchAsync(async (req, res, next) => {
   // }
 });
 
-exports.CreateTour = catchAsync(async (req, res, next) => {
-  // console.log(req.body);
-  const newTour = await Tour.create(req.body);
-  res.status(201).json({
-    status: 'success',
-    data: {
-      tour: newTour,
-    },
-  });
+exports.CreateTour = factory.CreateOne(Tour);
 
-  // try {
-  // } catch (err) {
-  //   res.status(400).json({
-  //     status: 'fail',
-  //     message: err,
-  //   });
-  // }
-});
-
-exports.EditTour = catchAsync(async (req, res, next) => {
-  const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      tour: tour,
-    },
-  });
-
-  // try {
-  // } catch (err) {
-  //   res.status(404).json({
-  //     status: 'fail',
-  //     message: err,
-  //   });
-  // }
-});
+exports.EditTour = factory.UpdateOne(Tour);
 
 exports.DeleteTour = factory.DeleteOne(Tour);
 // exports.DeleteTour = catchAsync(async (req, res, next) => {

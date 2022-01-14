@@ -15,18 +15,13 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createNewRev = catchAsync(async (req, res, next) => {
+exports.setTourUserIds = (req, res, next) => {
   if (!req.body.tour) req.body.tour = req.params.tourId;
   if (!req.body.user) req.body.user = req.user.id;
 
-  const newRev = await Review.create(req.body);
+  next();
+};
 
-  res.status(201).json({
-    status: 'success',
-    data: {
-      newReview: newRev,
-    },
-  });
-});
-
+exports.createNewRev = factory.CreateOne(Review);
 exports.deleteReview = factory.DeleteOne(Review);
+exports.updatereview = factory.UpdateOne(Review);

@@ -87,11 +87,7 @@ exports.getUser = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteUser = factory.DeleteOne(User);
+// Do NOT update passwords with this!
+exports.updateUser = factory.UpdateOne(User);
 
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!',
-  });
-};
+exports.deleteUser = factory.DeleteOne(User);
