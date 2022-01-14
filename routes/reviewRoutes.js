@@ -13,6 +13,7 @@ Router.route('/')
   );
 
 Router.route('/:id')
+  .get(reviewController.getReview)
   .patch(reviewController.updatereview)
   .delete(reviewController.deleteReview);
 

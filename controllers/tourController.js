@@ -1,5 +1,4 @@
 const Tour = require('../models/tourModel');
-const APIFeatures = require('../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handleFactory');
 
@@ -10,57 +9,13 @@ exports.aliasTopTours = (req, res, next) => {
   next();
 };
 
-exports.getAllTours = catchAsync(async (req, res, next) => {
-  // EXECUTE QUERY
-  const features = new APIFeatures(Tour.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
-  const tours = await features.query;
+exports.getAllTours = factory.getAll(Tour);
 
-  // SEND RESPONSE
-  res.status(200).json({
-    status: 'Success',
-    results: tours.length,
-    data: {
-      tours: tours,
-    },
-  });
-
-  // try {
-
-  // } catch (err) {
-  //   res.status(404).json({
-  //     status: 'fail',
-  //     message: err,
-  //   });
-  // }
-});
-
-exports.getTour = catchAsync(async (req, res, next) => {
-  const tour = await Tour.findById(req.params.id).populate('reviews');
-  res.status(200).json({
-    status: 'Success',
-    results: tour.length,
-    data: {
-      tour,
-    },
-  });
-  // try {
-  // } catch (err) {
-  //   res.status(404).json({
-  //     status: 'fail',
-  //     message: err,
-  //   });
-  // }
-});
-
+exports.getTour = factory.getOne(Tour, { path: 'reviews' });
 exports.CreateTour = factory.CreateOne(Tour);
-
 exports.EditTour = factory.UpdateOne(Tour);
-
 exports.DeleteTour = factory.DeleteOne(Tour);
+
 // exports.DeleteTour = catchAsync(async (req, res, next) => {
 //   const tour = await Tour.findByIdAndDelete(req.params.id);
 
@@ -100,14 +55,6 @@ exports.getTourStats = catchAsync(async (req, res, next) => {
       stats,
     },
   });
-
-  // try {
-  // } catch (err) {
-  //   res.status(404).json({
-  //     status: 'fail',
-  //     message: err,
-  //   });
-  // }
 });
 
 exports.monthlyPlan = catchAsync(async (req, res, next) => {
@@ -120,8 +67,8 @@ exports.monthlyPlan = catchAsync(async (req, res, next) => {
     {
       $match: {
         startDates: {
-          $gte: new Date(`${year}-01-01`),
-          $lte: new Date(`${year}-12-31`),
+          $gte: new Date(`${year}-01-01`), // Greater than equal to
+          $lte: new Date(`${year}-12-31`), // less than equal to
         },
       },
     },
@@ -151,11 +98,4 @@ exports.monthlyPlan = catchAsync(async (req, res, next) => {
       plan,
     },
   });
-  // try {
-  // } catch (err) {
-  //   res.status(404).json({
-  //     status: 'fail',
-  //     message: err,
-  //   });
-  // }
 });
