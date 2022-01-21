@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 // const validator = require('validator');
 // const User = require('./userModel');
+const slugify = require('slugify');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -13,6 +14,7 @@ const tourSchema = new mongoose.Schema(
       minLength: [10, 'A tour must have more or equal to 40 characters'],
       // validate: [validator.isAlpha, 'Tour name must only contain characters'],
     },
+    slug: String,
     duration: {
       type: Number,
       required: [true, 'A Tour must have a duration!'],
@@ -141,6 +143,11 @@ tourSchema.virtual('reviews', {
 //   this.guides = await Promise.all(guidesPromises); // VID-5 ,SEC - 11
 //   next();
 // });
+
+tourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
 
 // QUERY MIDDLEWARE
 // tourSchema.pre('find', function (next) {
