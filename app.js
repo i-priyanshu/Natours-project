@@ -19,12 +19,12 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 //1) GLOBAL MIDDLEWARES
-app.use(
-  helmet({
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-    crossOriginOpenerPolicy: { policy: 'unsafe-none' },
-  })
-);
+// app.use(
+//   helmet({
+//     crossOriginResourcePolicy: { policy: 'cross-origin' },
+//     crossOriginOpenerPolicy: { policy: 'unsafe-none' },
+//   })
+// );
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
