@@ -8810,7 +8810,30 @@ module.exports.default = axios;
 
 },{"./utils":"../../node_modules/axios/lib/utils.js","./helpers/bind":"../../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../../node_modules/axios/lib/cancel/isCancel.js","./env/data":"../../node_modules/axios/lib/env/data.js","./helpers/spread":"../../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../../node_modules/axios/lib/helpers/isAxiosError.js"}],"../../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"login.js":[function(require,module,exports) {
+},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"alerts.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.showAlert = exports.hideAlert = void 0;
+
+var hideAlert = function hideAlert() {
+  var el = document.querySelector('.alert');
+  if (el) el.parentElement.removeChild(el);
+};
+
+exports.hideAlert = hideAlert;
+
+var showAlert = function showAlert(type, msg) {
+  hideAlert();
+  var markup = "<div class=\"alert alert--".concat(type, "\">").concat(msg, "</div>");
+  document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+  window.setTimeout(hideAlert, 5000);
+};
+
+exports.showAlert = showAlert;
+},{}],"login.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8819,6 +8842,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.login = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _alerts = require("./alerts");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8848,7 +8873,7 @@ var login = /*#__PURE__*/function () {
             res = _context.sent;
 
             if (res.data.status === 'success') {
-              alert('Logged in Successsfully');
+              (0, _alerts.showAlert)('success', 'Logged in Successsfully');
               window.setTimeout(function () {
                 location.assign('/');
               }, 1500);
@@ -8861,7 +8886,7 @@ var login = /*#__PURE__*/function () {
           case 8:
             _context.prev = 8;
             _context.t0 = _context["catch"](0);
-            alert(_context.t0.response.data.message);
+            (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
           case 11:
           case "end":
@@ -8877,7 +8902,7 @@ var login = /*#__PURE__*/function () {
 }();
 
 exports.login = login;
-},{"axios":"../../node_modules/axios/index.js"}],"index.js":[function(require,module,exports) {
+},{"axios":"../../node_modules/axios/index.js","./alerts":"alerts.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("core-js/modules/es6.array.copy-within.js");
@@ -9193,7 +9218,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7160" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6856" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
