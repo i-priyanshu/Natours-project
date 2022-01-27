@@ -87,9 +87,11 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
   // console.log(token);
-
+  // console.log(req.header.authorization);
   if (!token) {
     return next(
       new AppError('You are not logged in!, please login to get access!', 401)
@@ -116,6 +118,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // PUTS USER OBJECT ON OUR REQUEST OBJECT.
   req.user = currentUser;
+  res.locals.user = currentUser;
   next();
 });
 
