@@ -9215,7 +9215,7 @@ var _login = require("./login");
 
 //Values
 var mapBox = document.getElementById('map');
-var loginForm = document.querySelector('.form');
+var loginForm = document.querySelector('.form--login');
 var logoutBtn = document.querySelector('.nav__el--logout');
 
 if (mapBox) {
