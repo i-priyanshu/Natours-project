@@ -9307,13 +9307,12 @@ if (loginForm) {
 if (logoutBtn) logoutBtn.addEventListener('click', _login.logout);
 if (userDataForm) userDataForm.addEventListener('submit', function (e) {
   e.preventDefault();
-  document.querySelector('.btn-save-password').textContent = 'Updating...';
-  var email = document.getElementById('email').value;
-  var name = document.getElementById('name').value;
-  (0, _updateSettings.updateSettings)({
-    name: name,
-    email: email
-  }, 'data');
+  var form = new FormData();
+  form.append('name', document.getElementById('name').value);
+  form.append('email', document.getElementById('email').value);
+  form.append('photo', document.getElementById('photo').files[0]);
+  console.log(form);
+  (0, _updateSettings.updateSettings)(form, 'data');
 });
 if (userPasswordForm) userPasswordForm.addEventListener('submit', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
@@ -9323,23 +9322,24 @@ if (userPasswordForm) userPasswordForm.addEventListener('submit', /*#__PURE__*/f
         switch (_context.prev = _context.next) {
           case 0:
             e.preventDefault();
+            document.querySelector('.btn-save-password').textContent = 'Updating...';
             passwordCurrent = document.getElementById('password-current').value;
             password = document.getElementById('password').value;
             passwordConfirm = document.getElementById('password-confirm').value;
-            _context.next = 6;
+            _context.next = 7;
             return (0, _updateSettings.updateSettings)({
               passwordCurrent: passwordCurrent,
               password: password,
               passwordConfirm: passwordConfirm
             }, 'password');
 
-          case 6:
+          case 7:
             document.querySelector('.btn-save-password').textContent = 'Save Settings';
             document.getElementById('password-current').value = '';
             document.getElementById('password').value = '';
             document.getElementById('password-confirm').value = '';
 
-          case 10:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -9379,7 +9379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "12572" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6203" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
