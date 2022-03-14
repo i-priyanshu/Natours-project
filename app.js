@@ -12,6 +12,7 @@ const tourRouter = require('./routes/tourRouter.js');
 const userRouter = require('./routes/userRoutes.js');
 const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 const morgan = require('morgan');
 const app = express();
 const cookieParser = require('cookie-parser');
@@ -80,6 +81,7 @@ app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/bookings', bookingRouter);
 
 // Exception Route Handler
 app.all('*', (req, res, next) => {
