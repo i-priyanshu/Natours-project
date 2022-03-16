@@ -36,10 +36,10 @@ const importData = async () => {
     await User.create(users, { validateBeforeSave: false });
     await Review.create(reviews);
 
-    console.log('Data Successfully Loaded!');
+    // console.log('Data Successfully Loaded!');
     process.exit();
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -50,19 +50,19 @@ const deleteData = async () => {
     await User.deleteMany();
     await Review.deleteMany();
 
-    console.log('Data Successfully Deleted!');
+    // console.log('Data Successfully Deleted!');
     process.exit();
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
 if (process.argv[2] === '--import') {
   importData();
-  console.log('Imported Data!');
+  // console.log('Imported Data!');
 } else if (process.argv[2] === '--delete') {
   deleteData();
-  console.log('Deleted Data!');
+  // console.log('Deleted Data!');
 }
 
-console.log(process.argv);
+// console.log(process.argv);

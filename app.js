@@ -16,6 +16,7 @@ const bookingRouter = require('./routes/bookingRoutes');
 const morgan = require('morgan');
 const app = express();
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -68,6 +69,8 @@ app.use(
     ],
   })
 );
+
+app.use(compression());
 
 // Test Middleware
 app.use((req, res, next) => {
